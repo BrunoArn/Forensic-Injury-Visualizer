@@ -21,13 +21,16 @@ public class ObjectRotate : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButton(0)) {
-            
-            horizontalAngle += Input.GetAxis("Mouse X") * rotationSpeed;
-            verticalAngle -= Input.GetAxis("Mouse Y") * rotationSpeed;
-            verticalAngle = Mathf.Clamp(verticalAngle, yMinLimit, yMaxLimit);
+        if (Input.GetMouseButton(0))
+    {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
 
-            transform.rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
-        }
+        horizontalAngle += mouseX * rotationSpeed * Time.deltaTime;
+        verticalAngle -= mouseY * rotationSpeed * Time.deltaTime;
+        verticalAngle = Mathf.Clamp(verticalAngle, yMinLimit, yMaxLimit);
+
+        transform.rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
+    }
     }
 }

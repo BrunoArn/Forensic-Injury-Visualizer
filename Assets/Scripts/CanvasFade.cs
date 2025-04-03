@@ -4,7 +4,10 @@ using UnityEngine;
 public class CanvasFade : MonoBehaviour
 {
 
-    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private CanvasGroup injuryCanvasGroup;
+    [SerializeField] private CanvasGroup allImagesCanvasGroup;
+    [SerializeField] private CanvasGroup MosaicCanvasGroup;
+    [SerializeField] private CanvasGroup babyButtonsCanvasGroup;
     [SerializeField] private float fadeDuration = 0.3f;
 
     [SerializeField] Camera mainCamera;
@@ -17,32 +20,58 @@ public class CanvasFade : MonoBehaviour
     {
         if (mainCamera == null) { mainCamera = Camera.main; }
 
-        canvasGroup.alpha = 0;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
+        injuryCanvasGroup.alpha = 0;
+        injuryCanvasGroup.interactable = false;
+        injuryCanvasGroup.blocksRaycasts = false;
+
+        MosaicCanvasGroup.alpha = 0;
+        MosaicCanvasGroup.interactable = false;
+        MosaicCanvasGroup.blocksRaycasts = false;
     }
 
-    public void ShowCanvas() {
-        gameObject.SetActive(true);
-        StartCoroutine(FadeCanvasRoutine(1, middleCameraPosition));
+    public void ShowInjuryCanvas() {
+        //gameObject.SetActive(true);
+        StartCoroutine(FadeCanvasRoutine(injuryCanvasGroup, 1));
+        StartCoroutine(MoveCameraRoutine(middleCameraPosition));
+
+        StartCoroutine(FadeCanvasRoutine(allImagesCanvasGroup, 0));
     }
 
-    public void HideCanvas() {
-        StartCoroutine(FadeCanvasRoutine(0, focusTarget.position + offset));
+    public void HideInjuryCanvas() {
+        StartCoroutine(FadeCanvasRoutine(injuryCanvasGroup, 0));
+        StartCoroutine(MoveCameraRoutine(focusTarget.position + offset));
+
+        StartCoroutine(FadeCanvasRoutine(allImagesCanvasGroup, 1));
     }
 
-    IEnumerator FadeCanvasRoutine(float targetAlpha, Vector3 cameraTargetPosition) {
+    public void ShowMosaicCanvas() {
+        StartCoroutine(FadeCanvasRoutine(MosaicCanvasGroup, 1));
+        StartCoroutine(MoveCameraRoutine(middleCameraPosition));
+        BabyButtonActivation(false);
+
+        StartCoroutine(FadeCanvasRoutine(allImagesCanvasGroup, 0));
+    }
+
+    public void HideMosaicCanvas() {
+        StartCoroutine(FadeCanvasRoutine(MosaicCanvasGroup, 0));
+        StartCoroutine(MoveCameraRoutine(focusTarget.position + offset));
+        BabyButtonActivation(true);
+
+        StartCoroutine(FadeCanvasRoutine(allImagesCanvasGroup, 1));
+    }
+
+    private void BabyButtonActivation(bool isActive) {
+        babyButtonsCanvasGroup.interactable = isActive;
+        babyButtonsCanvasGroup.blocksRaycasts = isActive;
+    }
+
+    IEnumerator FadeCanvasRoutine(CanvasGroup canvasGroup, float targetAlpha) {
         float startAlpha = canvasGroup.alpha;
         float time = 0f;
-
-        Vector3 startCamPos = mainCamera.transform.position;
 
         while (time < fadeDuration) {
 
             float t = time/fadeDuration;
-
-            //camera move
-            mainCamera.transform.position = Vector3.Lerp(startCamPos, cameraTargetPosition, t);
             //canvas fade
             canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
 
@@ -51,13 +80,28 @@ public class CanvasFade : MonoBehaviour
         }
 
         //finalizaçao exata
-        mainCamera.transform.position = cameraTargetPosition;
         canvasGroup.alpha = targetAlpha;
 
         bool isVisible = targetAlpha > 0;
         canvasGroup.interactable = isVisible;
         canvasGroup.blocksRaycasts = isVisible;
 
-        if(!isVisible) { gameObject.SetActive(false); }
+        //if(!isVisible) { gameObject.SetActive(false); }
+    }
+
+    IEnumerator MoveCameraRoutine(Vector3 cameraTargetPosition) {
+        float time = 0f;
+        Vector3 startCamPos = mainCamera.transform.position;
+
+        while (time < fadeDuration) {
+            float t = time/fadeDuration;
+
+            mainCamera.transform.position = Vector3.Lerp(startCamPos, cameraTargetPosition, t);
+
+            time += Time.deltaTime;
+            yield return null;
+         }
+
+         mainCamera.transform.position = cameraTargetPosition;
     }
 }

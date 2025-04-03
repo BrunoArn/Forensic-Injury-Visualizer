@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66bb488f2c2c19a4a9ad89049491a0ca, type: 3}
+  m_Name: MosaicPage1
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 0f97b6f10b9534c0280218c3d67de7eb, type: 3}
+  - {fileID: 21300000, guid: e79ee8a06418843288c970d7fe29f174, type: 3}
+  - {fileID: 21300000, guid: cfbfacbb7d53f406091de663d464de92, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

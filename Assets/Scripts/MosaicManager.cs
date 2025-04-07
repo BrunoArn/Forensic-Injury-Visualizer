@@ -4,9 +4,15 @@ using UnityEngine.UI;
 
 public class MosaicManager : MonoBehaviour
 {
+    [Header("Mosaic Pages")]
+    [Space]
     [SerializeField] private List<MosaicPage> mosaicPages;
-    [SerializeField] private List<GameObject> mosaicImages;
 
+
+    private List<Image> mosaicChildImages = new List<Image>();
+    
+    [Header("Buttons")]
+    [Space]
     [SerializeField] private GameObject NextButton;
     [SerializeField] private GameObject previousButton;
 
@@ -15,8 +21,8 @@ public class MosaicManager : MonoBehaviour
     void Start()
     {
         currentPage = 0;
+        SetUpImages();
         UpdateMosaicPage(currentPage);
-        Debug.Log(mosaicPages.Count);
     }
 
     void Update()
@@ -42,12 +48,24 @@ public class MosaicManager : MonoBehaviour
         UpdateMosaicPage(currentPage - 1);
     }
 
-    private void UpdateMosaicPage(int page) {
-        Debug.Log("Updating Page, current page is: " + page);
+    private void SetUpImages() 
+    {
+       foreach (Transform child in transform)
+       {
+            if (child.childCount > 0) {
+                Transform grandChild = child.GetChild(0);
+                Image img = grandChild.GetComponent<Image>();
 
-        for (int i = 0; i < mosaicImages.Count; i++) {
-            Image image = mosaicImages[i].GetComponent<Image>();
-            image.sprite = mosaicPages[page].GetSprite(i);
+                if(img != null) {
+                    mosaicChildImages.Add(img);
+                }
+            }
+       }
+    }
+
+    private void UpdateMosaicPage(int page) {
+        for (int i = 0; i < mosaicChildImages.Count; i++) {
+            mosaicChildImages[i].sprite = mosaicPages[page].GetSprite(i);
         }
         currentPage = page;
     }

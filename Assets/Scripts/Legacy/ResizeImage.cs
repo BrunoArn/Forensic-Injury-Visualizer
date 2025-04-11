@@ -8,26 +8,27 @@ public class ResizeImage : MonoBehaviour
     [SerializeField] private Vector2 targetSize = new Vector2(300f, 300f);
 
     private RectTransform rectTransform;
-    private RectTransform canvasReactTransform;
-
     private Vector2 originnalSize;
-    private Vector2 originalAnchoredPosition;
+
+    private Transform originalParent;
+
+    [Header("Parent to reposition")]
+    [SerializeField] Transform newParentCanvas;
 
     [Header("Boolean Reference")]
+    [Space]
     [SerializeField] private BoolReference isResized;
-    [SerializeField] private bool imResized;
+    private bool imResized;
 
     void Start()
     {
+        if(!isResized.useConstantValue) {
+            isResized.Value = false;
+        }
+
         rectTransform = GetComponent<RectTransform>();
         originnalSize = rectTransform.sizeDelta;
-        originalAnchoredPosition = rectTransform.anchoredPosition;
-
-        Canvas canvas = GetComponentInParent<Canvas>();
-        if (canvas != null)
-        {
-            canvasReactTransform = canvas.GetComponent<RectTransform>();
-        }
+        originalParent = this.transform.parent;
 
         GetComponent<Button>()?.onClick.AddListener(ToggleSize);
     }
@@ -38,14 +39,15 @@ public class ResizeImage : MonoBehaviour
 
         if(!isResized.Value) 
         {
-            Resize(targetSize, Vector2.zero);
+            //Resize(targetSize, Vector2.zero);
+            Resize(targetSize, newParentCanvas);
 
             if(!isResized.useConstantValue) { imResized = true; }
             isResized.Value = true;
         }
         else
         {
-            Resize(originnalSize, originalAnchoredPosition);
+            Resize(originnalSize, originalParent);
 
             if(!isResized.useConstantValue) { imResized = false; }
             isResized.Value = false;
@@ -53,9 +55,15 @@ public class ResizeImage : MonoBehaviour
 
     }
 
-    private void Resize(Vector2 targetSize, Vector2 position)
+    private void Resize(Vector2 targetSize, Transform parent)
     {
         rectTransform.sizeDelta = targetSize;
-        rectTransform.anchoredPosition = position;
+        transform.SetParent(parent, false);
+    }
+
+    public void ForceMini()
+    {
+        Resize(originnalSize, originalParent);
+        isResized.Value = false;
     }
 }

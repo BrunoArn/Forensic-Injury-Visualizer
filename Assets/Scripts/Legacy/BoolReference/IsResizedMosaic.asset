@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa498bd5624f41edad02f14135ce5ec, type: 3}
-  m_Name: Injury 3
+  m_Script: {fileID: 11500000, guid: a1ede2203e9c5964cab2ef286a590c5d, type: 3}
+  m_Name: IsResizedMosaic
   m_EditorClassIdentifier: 
-  InjuryTitle: Dodoi no canto
-  injuryText: socorro ta doendo, machucaaa
-  injuryImage: {fileID: 21300000, guid: cfbfacbb7d53f406091de663d464de92, type: 3}
+  Value: 0

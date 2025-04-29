@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aa498bd5624f41edad02f14135ce5ec, type: 3}
-  m_Name: INjury1
+  m_Name: Model Injury Info
   m_EditorClassIdentifier: 
-  InjuryTitle: Equimose
-  injuryText: "Essa equimose pega ali e vai at\xE9 l\xE1, mo doidera teste deamanho
-    tamanho vai mais um e tenta mais tamb\xE9m deamanho tamanho vai mais um e tenta
-    mais tamb\xE9mdeamanho tamanho vai \n"
-  injuryImage: {fileID: 21300000, guid: 0f97b6f10b9534c0280218c3d67de7eb, type: 3}
+  InjuryTitle: 
+  injuryText: Aliquam enim elit, feugiat sit amet maximus quis, hendrerit eu enim.
+    Integer diam neque, porttitor et vestibulum id, hendrerit vitae arcu. Morbi tristique
+    pharetra pellentesque. Integer vestibulum volutp
+  injuryImage: {fileID: 21300000, guid: d4f0387f4816ba94ea5e081311c41c9e, type: 3}

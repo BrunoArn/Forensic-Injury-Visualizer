@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aa498bd5624f41edad02f14135ce5ec, type: 3}
-  m_Name: Injury 2
+  m_Name: Model Injury Info 2
   m_EditorClassIdentifier: 
-  InjuryTitle: machucadnho do lado
-  injuryText: doi e doi muito, entao tem que ver se doi mais pra la ou para ca, importante
-    saber a dor ai e tal taltatlal
-  injuryImage: {fileID: 21300000, guid: e79ee8a06418843288c970d7fe29f174, type: 3}
+  InjuryTitle: 
+  injuryText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis cursus
+    neque ac dolor ullamcorper, ac finibus magna efficitur. Aliquam enim elit, feugiat
+    sit amet maximus quis, hendrerit eu enim. '
+  injuryImage: {fileID: 21300000, guid: d4f0387f4816ba94ea5e081311c41c9e, type: 3}

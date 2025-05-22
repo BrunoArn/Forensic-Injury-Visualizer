@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa498bd5624f41edad02f14135ce5ec, type: 3}
   m_Name: Model Injury Info
   m_EditorClassIdentifier: 
-  InjuryTitle: 
+  InjuryTitle: Injury 1
   injuryText: Aliquam enim elit, feugiat sit amet maximus quis, hendrerit eu enim.
     Integer diam neque, porttitor et vestibulum id, hendrerit vitae arcu. Morbi tristique
     pharetra pellentesque. Integer vestibulum volutp

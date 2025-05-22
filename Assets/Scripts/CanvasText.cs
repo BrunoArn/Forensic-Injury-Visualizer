@@ -8,32 +8,40 @@ public class CanvasText : MonoBehaviour
     [Header("Title configs")]
     [SerializeField] GameObject title;
     [Header("text configs")]
-    [SerializeField] Image textBackgorund;
+    [SerializeField] GameObject textBackgorund;
     [SerializeField] GameObject textBody;
     [SerializeField] float heightOffset;
     [Header("Image configs")]
     [SerializeField] GameObject textImage;
 
     private TextMeshProUGUI titleText;
+    private Image textBackgorundImage;
     private TextMeshProUGUI textBodyText;
     private Image imageSprite;
 
     void Start()
     {
         titleText = title.GetComponent<TextMeshProUGUI>();
+
+        textBackgorundImage = textBackgorund.GetComponent<Image>();
         textBodyText = textBody.GetComponent<TextMeshProUGUI>();
+
         imageSprite = textImage.GetComponent<Image>();
     }
 
     private void MatchBackgroundWithTextHeight()
     {
-        if (textBodyText == null || textBackgorund == null) return;
+        if (textBodyText == null || textBackgorundImage == null) return;
+
+        bool hasText = !string.IsNullOrWhiteSpace(textBodyText.text);
+        textBackgorund.SetActive(hasText);
+
 
         // Get preferred height of the TMP text
         float textHeight = textBodyText.preferredHeight;
 
         // Get the Image RectTransform
-        RectTransform imageRect = textBackgorund.rectTransform;
+        RectTransform imageRect = textBackgorundImage.rectTransform;
 
         // Match height with offset
         Vector2 size = imageRect.sizeDelta;

@@ -7,7 +7,7 @@ A forensic tool for visualizing injuries on a 3D human model. The application al
 - Interactive 3D human model
 - Numbered injury markers
 
-![Demo](ReadMeAssets/model.gid)
+![Demo](ReadMeAssets/model.gif)
 
 - Photo linking: each injury can display a related forensic photograph
 
